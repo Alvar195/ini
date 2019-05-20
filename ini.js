@@ -5,8 +5,6 @@ exports.stringify = exports.encode = encode
 exports.safe = safe
 exports.unsafe = unsafe
 
-const util = require('util')
-
 var eol = typeof process !== 'undefined' &&
   process.platform === 'win32' ? '\r\n' : '\n'
 
