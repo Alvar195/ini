@@ -17,9 +17,9 @@ Consider an ini-file `config.ini` that looks like this:
 
     [paths.default]
     datadir = /var/lib/data
-    array[] = first value
-    array[] = second value
-    array[] = third value
+    array = first value
+    array = second value
+    array = third value
 
 You can read, manipulate and write the ini-file like so:
 
@@ -47,10 +47,10 @@ to the filesystem with the following content:
     database=use_another_database
     [section.paths.default]
     tmpdir=/tmp
-    array[]=first value
-    array[]=second value
-    array[]=third value
-    array[]=fourth value
+    array=first value
+    array=second value
+    array=third value
+    array=fourth value
 
 
 ## API
