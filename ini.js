@@ -5,6 +5,8 @@ exports.stringify = exports.encode = encode
 exports.safe = safe
 exports.unsafe = unsafe
 
+const util = require('util')
+
 var eol = typeof process !== 'undefined' &&
   process.platform === 'win32' ? '\r\n' : '\n'
 
@@ -28,7 +30,8 @@ function encode (obj, opt) {
     var val = obj[k]
     if (val && Array.isArray(val)) {
       val.forEach(function (item) {
-        out += safe(k + '[]') + separator + safe(item) + '\n'
+		// remove []
+        out += safe(k /*+ '[]'*/) + separator + safe(item) + '\n'
       })
     } else if (val && typeof val === 'object') {
       children.push(k)
@@ -92,8 +95,8 @@ function decode (str) {
     }
 
     // Convert keys with '[]' suffix to an array
-    if (key.length > 2 && key.slice(-2) === '[]') {
-      key = key.substring(0, key.length - 2)
+    if (key.length > 2 && key.slice(-2) === '[]' || Object.keys(p).includes(key)) { // does key exist already
+      key = key.substring(0, key.length /*- 2*/) // ignore []
       if (!p[key]) {
         p[key] = []
       } else if (!Array.isArray(p[key])) {
